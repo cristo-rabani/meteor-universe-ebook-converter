@@ -23,7 +23,7 @@ UniEBookConverter = {
               }
             };
         }
-        var callback = _.once(cb);
+        var callback = _.once(Meteor.bindEnvironment(cb));
         if(!_.isObject(options)){
             throw new Meteor.Error('Options must be an object with keys: "source", "target"');
         }
