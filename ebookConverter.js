@@ -1,9 +1,11 @@
 'use strict';
 
 var spawn = Npm.require('child_process').spawn;
+var os = Meteor.npmRequire('os');
+var path = Meteor.npmRequire('path');
 
 //var re = /(?:\.([^.]+))?$/;
-var _sourceDir = '/tmp/', _targetDir = '/tmp/', _defaultParams = [];
+var _sourceDir = os.tmpDir(), _targetDir = os.tmpDir(), _defaultParams = [];
 /* global UniEBookConverter: true */
 UniEBookConverter = {
     setSourceDirectory: function(path){
@@ -27,8 +29,8 @@ UniEBookConverter = {
         if(!_.isObject(options)){
             throw new Meteor.Error('Options must be an object with keys: "source", "target"');
         }
-        var source = _sourceDir + options.source;
-        var target = _targetDir + options.target;
+        var source = path.join(_sourceDir, options.source);
+        var target = path.join(_targetDir, options.target);
         var params = [source, target];
         params = params.concat(_defaultParams);
         if (UniUtils.get(options, 'arguments.length')) {
