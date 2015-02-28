@@ -1,6 +1,6 @@
 'use strict';
 
-var spawn = Npm.require('child_process').spawn;
+var exec = Npm.require('child_process').exec;
 var os = Meteor.npmRequire('os');
 var path = Meteor.npmRequire('path');
 
@@ -31,16 +31,26 @@ UniEBookConverter = {
         }
         var source = path.join(_sourceDir, options.source);
         var target = path.join(_targetDir, options.target);
-        var params = [source, target];
-        params = params.concat(_defaultParams);
+        var params = [];
+        params = concatArrays(params, _defaultParams);
+
         if (UniUtils.get(options, 'arguments.length')) {
-            params = params.concat(options.arguments)
+            params = concatArrays(params, options.arguments);
         }
-        //var targetType = re.exec(target);
+        params = _.map(params, function(p){
+            if(_.isArray(p)){
+                p[0] = '--'+p[0];
+                if(p[1]){
+                    p[1] = '"'+p[1].replace('"', '\"')+'"'
+                }
+                p = p.join(' ');
+            }
+            return p;
+        });
         var _log = '';
         var _errorLog = '';
-
-        var convert = spawn('ebook-convert', params);
+        params = params.join(' ');
+        var convert = exec('ebook-convert ' +source+ ' ' + target + ' ' + params);
         convert.stdout.setEncoding('utf8');
         convert.stdout.on('data', function(data){
             _log += data.toString();
@@ -58,9 +68,18 @@ UniEBookConverter = {
     }
 };
 
+var concatArrays = function(orgArr, toAddArr){
+    _.each(toAddArr, function(p){
+        if(!_.isArray(p)){
+            throw new Meteor.Error('Any parameter must be in an array! [name, value]');
+        }
+        orgArr.push(p);
+    });
+    return orgArr;
+};
 //Test if we have installed ebook-convert...
 var _v = '';
-var _s = spawn('ebook-convert', ['--version']).on('error', function(err){
+var _s = exec('ebook-convert --version').on('error', function(err){
     if(err){
         console.error('Do you have calibre ebook-convert installed? Please visit http://calibre-ebook.com/download_linux', err);
     }
