@@ -40,7 +40,7 @@ UniEBookConverter = {
         params = _.map(params, function(p){
             if(_.isArray(p)){
                 p[0] = '--'+p[0];
-                if(p[1]){
+                if(p[1] && _.isString(p[1])){
                     p[1] = '"'+p[1].replace('"', '\"')+'"'
                 }
                 p = p.join(' ');
