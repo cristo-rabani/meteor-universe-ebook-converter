@@ -10,6 +10,12 @@ To install or upgrade, simply copy paste the following command into a terminal a
 sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 ```
 
+Tips: if you have problems with installation of calibre try install:
+
+```
+sudo apt-get install xdg-utils qt4-default imagemagick python-imaging python-mechanize python-lxml python-dateutil python-cssutils python-beautifulsoup python-dnspython python-poppler libpodofo-utils libwmf-bin python-chm
+```
+
 ## How To Use:
 
 ```

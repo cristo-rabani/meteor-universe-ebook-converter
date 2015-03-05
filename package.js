@@ -1,7 +1,7 @@
 Package.describe({
     name: 'vazco:universe-ebook-converter',
     summary: 'Convert an ebook from one format to another',
-    version: '0.1.6',
+    version: '1.0.0',
     git: 'https://github.com/cristo-rabani/universe-ebook-converter.git'
 });
 
