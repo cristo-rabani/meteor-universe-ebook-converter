@@ -1,6 +1,6 @@
 Package.describe({
     name: 'vazco:universe-ebook-converter',
-    summary: 'Convert an ebook from one format to another. kindle, pdf, azw3, epub, mobi. Cover, Table Of Contents',
+    summary: 'Convert an ebook from one format to another. kindle, pdf, azw3, epub, mobi. cover, table of contents',
     version: '1.0.1',
     git: 'https://github.com/cristo-rabani/universe-ebook-converter.git'
 });
