@@ -16,7 +16,7 @@ Tips: if you have problems with installation of calibre try install:
 sudo apt-get install xdg-utils qt4-default imagemagick python-imaging python-mechanize python-lxml python-dateutil python-cssutils python-beautifulsoup python-dnspython python-poppler libpodofo-utils libwmf-bin python-chm
 ```
 
-### Add package to meteor 
+#### Add package to meteor 
 
 ```
 $ meteor add vazco:universe-ebook-converter
